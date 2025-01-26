@@ -30,6 +30,7 @@ class AuthServices
             ->with('role')
             ->where('status', 'active')
             ->where('id', auth()->user()->id)
+            // ->where('id', Auth::id())
             ->get()
             ->map(function ($user) {
                 $permissions = Permission::with(['children' => function ($query) {

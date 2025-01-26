@@ -9,7 +9,9 @@ use App\Http\Controllers\Api\Data\InstitutionController;
 use App\Http\Controllers\Api\Data\PharmacyController;
 use App\Http\Controllers\Api\People\DependentController;
 use App\Http\Controllers\Api\People\DoctorController;
+use App\Http\Controllers\Api\People\PatientController;
 use App\Http\Controllers\Api\People\VisitorController;
+use App\Http\Controllers\Api\Sale\OpportunityController;
 use App\Http\Controllers\Api\Sale\ProductController;
 
 Route::prefix('auth')->group(function () {
@@ -24,11 +26,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::prefix('sale')->group(function () {
         Route::prefix('opportunity')->group(function () {
-            Route::get('/', [UsersController::class, 'get']);
-            Route::post('store', [UsersController::class, 'store']);
-            Route::put('update/{id}', [UsersController::class, 'update']);
-            Route::get('roles', [UsersController::class, 'getRoles']);
-            Route::post('export', [UsersController::class, 'exportToExcel']);
+            Route::get('/', [OpportunityController::class, 'get']);
+            Route::post('store', [OpportunityController::class, 'store']);
+            Route::put('update/{id}', [OpportunityController::class, 'update']);
+            Route::get('roles', [OpportunityController::class, 'getRoles']);
+            Route::post('export', [OpportunityController::class, 'exportToExcel']);
         });
         Route::prefix('product')->group(function () {
             Route::get('/', [ProductController::class, 'get']);
@@ -46,7 +48,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         });
     });
 
-    Route::prefix('persons')->group(function () {
+    Route::prefix('people')->group(function () {
         Route::prefix('dependent')->group(function () {
             Route::get('/', [DependentController::class, 'get']);
             Route::post('store', [DependentController::class, 'store']);
@@ -64,6 +66,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
             Route::post('store', [VisitorController::class, 'store']);
             Route::put('update/{id}', [VisitorController::class, 'update']);
             Route::post('export', [VisitorController::class, 'exportToExcel']);
+        });
+        Route::prefix('patient')->group(function () {
+            Route::get('/', [PatientController::class, 'get']);
+            Route::post('store', [PatientController::class, 'store']);
+            Route::put('update/{id}', [PatientController::class, 'update']);
+            Route::post('export', [PatientController::class, 'exportToExcel']);
         });
     });
 

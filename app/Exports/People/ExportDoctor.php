@@ -18,12 +18,12 @@ class ExportDoctor implements FromCollection, WithHeadings, WithMapping, WithEve
     public function collection()
     {
         return Doctor::select(
-            'd.nombre as Nombre',
-            'd.direccion_doctor as Direccion',
-            'dept.nombre as Departamento',
-            'mun.nombre as Municipio',
-            'p.nombre as Pais',
-            'd.fecha as Fecha',
+            'd.nombre',
+            'd.direccion_doctor',
+            'dept.nombre as departamento',
+            'mun.nombre as municipio',
+            'p.nombre as pais',
+            'd.fecha',
         )
             ->from('doctores as d')
             ->leftJoin('paises as p', 'd.id_pais', '=', 'p.id')
@@ -34,12 +34,12 @@ class ExportDoctor implements FromCollection, WithHeadings, WithMapping, WithEve
     public function map($doctor): array
     {
         return [
-            $doctor->Nombre,
-            $doctor->Direccion,
-            $doctor->Departamento,
-            $doctor->MUnicipio,
-            $doctor->Pais,
-            $doctor->Fecha,
+            $doctor->nombre,
+            $doctor->direccion_doctor,
+            $doctor->departamento,
+            $doctor->municipio,
+            $doctor->pais,
+            $doctor->fecha,
         ];
     }
 
