@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\People\PatientController;
 use App\Http\Controllers\Api\People\VisitorController;
 use App\Http\Controllers\Api\Sale\OpportunityController;
 use App\Http\Controllers\Api\Sale\ProductController;
+use App\Http\Controllers\Api\Setting\MaintenanceController;
 
 Route::prefix('auth')->group(function () {
     Route::post('login', [AuthController::class, 'login']);
@@ -109,6 +110,17 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
             Route::post('store', [RolesController::class, 'store']);
             Route::put('update/{id}', [RolesController::class, 'update']);
             Route::get('permissions', [RolesController::class, 'getPermissions']);
+        });
+    });
+
+    Route::prefix('setting')->group(function () {
+        Route::prefix('maintenance')->group(function () {
+            Route::get('/', [MaintenanceController::class, 'get']);
+            Route::post('store', [MaintenanceController::class, 'store']);
+            Route::put('update/{id}', [MaintenanceController::class, 'update']);
+            Route::get('child', [MaintenanceController::class, 'getChild']);
+            Route::post('child/store', [MaintenanceController::class, 'storeChild']);
+            Route::put('child/update/{id}', [MaintenanceController::class, 'updateChild']);
         });
     });
 });
