@@ -62,11 +62,13 @@ class MaintenanceServices
 
         if ($dto->search) {
             $query->where(function ($query) use ($dto) {
-                $query->where('descripcion', 'like', '%' . $dto->search . '%');
+                $query->where('mh.descripcion', 'like', '%' . $dto->search . '%')
+                    ->orWhere('mp.descripcion', 'like', '%' . $dto->search . '%');
             });
         }
 
-        $data = $query->orderBy('id', 'desc')->paginate($dto->perPage, $dto->page);
+        $data = $query->orderBy('mp.descripcion', 'asc')->orderBy('mh.descripcion', 'asc')
+            ->paginate($dto->perPage, $dto->page);
         return $data;
     }
 
