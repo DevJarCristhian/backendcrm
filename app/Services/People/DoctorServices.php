@@ -14,11 +14,11 @@ class DoctorServices
 
         $query = Doctor::select(
             'd.id',
-            'dept.id as departmentId',
+            // 'dept.id as departmentId',
             (DB::raw('COALESCE(dept.nombre, "-") as departmentName')),
-            'p.id as country',
+            // 'p.id as country',
             (DB::raw('COALESCE(p.nombre, "-") as countryName')),
-            'mun.id as cityId',
+            // 'mun.id as cityId',
             (DB::raw('COALESCE(mun.nombre, "-") as city')),
             'd.nombre as name',
             'd.direccion_doctor as address',

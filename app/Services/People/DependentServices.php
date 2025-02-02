@@ -14,12 +14,11 @@ class DependentServices
 
         $query = Dependent::select(
             'd.id',
-            'dept.id as departmentId',
+            // 'dept.id as departmentId',
             'dept.nombre as departmentName',
-            'p.id as country',
+            // 'p.id as country',
             'p.nombre as countryName',
-            'd.nombre as firstName',
-            'd.apellido as lastName',
+            DB::raw('CONCAT(d.nombre, " ", d.apellido) as fullName'),
             'd.sexo as gender',
             'd.direccion as address',
             'd.correo_electronico as email',
@@ -27,7 +26,7 @@ class DependentServices
             (DB::raw('COALESCE(d.fecha_nacimiento, "-") as birthDate')),
             'd.numero_documento as documentNumber',
             'd.fecha_inscripcion as enrollmentDate',
-            'd.updated_at as updatedAt'
+            // 'd.updated_at as updatedAt'
         )
             ->from('dependientes as d')
             ->leftJoin('paises as p', 'd.pais', '=', 'p.id')

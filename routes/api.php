@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\Access\RolesController;
 use App\Http\Controllers\Api\Access\UsersController;
+use App\Http\Controllers\Api\All\AllController;
 use App\Http\Controllers\Api\Data\ChainController;
 use App\Http\Controllers\Api\Data\InstitutionController;
 use App\Http\Controllers\Api\Data\PharmacyController;
@@ -25,9 +26,14 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('logout', [AuthController::class, 'logout']);
     });
 
+    Route::prefix('all')->group(function () {
+        Route::get('maintenance', [AllController::class, 'getMaintenance']);
+    });
+
     Route::prefix('sale')->group(function () {
         Route::prefix('opportunity')->group(function () {
             Route::get('/', [OpportunityController::class, 'get']);
+            Route::get('/{id}', [OpportunityController::class, 'getById']);
             Route::post('store', [OpportunityController::class, 'store']);
             Route::put('update/{id}', [OpportunityController::class, 'update']);
             Route::get('roles', [OpportunityController::class, 'getRoles']);
@@ -37,14 +43,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
             Route::get('/', [ProductController::class, 'get']);
             Route::post('store', [ProductController::class, 'store']);
             Route::put('update/{id}', [ProductController::class, 'update']);
-            Route::get('permissions', [ProductController::class, 'getPermissions']);
             Route::post('export', [ProductController::class, 'exportToExcel']);
         });
         Route::prefix('price')->group(function () {
             Route::get('/', [RolesController::class, 'get']);
             Route::post('store', [RolesController::class, 'store']);
             Route::put('update/{id}', [RolesController::class, 'update']);
-            Route::get('permissions', [RolesController::class, 'getPermissions']);
             Route::post('export', [RolesController::class, 'exportToExcel']);
         });
     });
@@ -70,6 +74,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         });
         Route::prefix('patient')->group(function () {
             Route::get('/', [PatientController::class, 'get']);
+            Route::get('/{id}', [PatientController::class, 'getById']);
             Route::post('store', [PatientController::class, 'store']);
             Route::put('update/{id}', [PatientController::class, 'update']);
             Route::post('export', [PatientController::class, 'exportToExcel']);

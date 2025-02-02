@@ -13,10 +13,10 @@ class PharmacyServices
     {
         $query = Pharmacy::select(
             'f.id',
-            'f.id_farmacia as pharmacyId',
-            'ca.id as chainId',
+            // 'f.id_farmacia as pharmacyId',
+            // 'ca.id as chainId',
             (DB::raw('COALESCE(ca.cadena, "-") as chainName')),
-            'dept.id as departmentId',
+            // 'dept.id as departmentId',
             (DB::raw('COALESCE(dept.nombre, "-") as departmentName')),
             'f.sucursal as branch',
             'f.telefono as phone',

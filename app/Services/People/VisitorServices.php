@@ -24,7 +24,7 @@ class VisitorServices
 
         if ($dto->search) {
             $query->where(function ($query) use ($dto) {
-                $query->where('d.nombre', 'like', '%' . $dto->search . '%');
+                $query->where('v.nombre', 'like', '%' . $dto->search . '%');
                 // ->orWhere('mun.nombre', 'like', '%' . $dto->search . '%');
             });
         }

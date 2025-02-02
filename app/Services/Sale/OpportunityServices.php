@@ -13,40 +13,15 @@ class OpportunityServices
     {
         $query = Opportunity::select(
             'o.id',
-            // 'pa.id as patientId',
             'pa.numero_documento as documentNumber',
             DB::raw('CONCAT(pa.nombre, " ", pa.apellido) as patientFullName'),
-
-            // 'fa.id as farmacyId',
             'fa.sucursal as farmacyName',
-            // 'pro.id as productId',
             'pro.descripcion as productName',
-
-            // 'o.id_usuario_anulacion as cancelationUserId',
             'o.serie_factura as invoiceSerie',
             'o.no_factura as invoiceNumber',
             'o.cantidad as quantity',
             'o.fecha_facturacion as invoiceDate',
-            'o.activo as active',
-            // 'o.cantidades_utilizadas as usedQuantity',
-            // 'o.anulacion as cancellation',
-            // 'o.fecha_bonificacion as certificationDate',
-            // 'o.estado_canje as exchangeState',
-            // 'o.validacion as validation',
-            // 'o.fecha_ultima_toma as lastTakeDate',
-            // 'o.fecha_abandono_tratamiento as abandonmentTreatmentDate',
-
-            // 'o.id_motivo_compra as purchaseReasonId',
-            // 'o.id_motivo_anulacion as cancellationReasonId',
-            // 'o.id_diagnostico as diagnosisId',
-            // 'o.id_dosis as doseId',
-            // 'o.id_tiempo_tratamiento as treatmentTimeId',
-            // 'o.id_otros as otherId',
-            // 'o.observaciones as observations',
-            'o.fecha_creacion as createdAt',
-            'o.fecha_actualiza as updatedAt',
-            // 'o.usuario_crea as createdBy',
-            // 'o.usuario_modifica as updatedBy',
+            'o.fecha_actualiza as dateUpdated',
         )
             ->from('oportunidades as o')
             ->leftJoin('pacientes as pa', 'o.id_paciente', '=', 'pa.id')

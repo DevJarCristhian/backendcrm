@@ -41,7 +41,7 @@ class ExportDependent implements FromCollection, WithHeadings, WithMapping, With
             $dependent->nombre . ', ' . $dependent->apellido,
             $dependent->direccion,
             $dependent->correo_electronico,
-            $dependent->sexo == '1' ? 'Masculino' : 'Femenino',
+            $dependent->sexo == '1' ? 'Hombre' : 'Mujer',
             $dependent->celular,
             $dependent->pais,
             $dependent->departamento,
