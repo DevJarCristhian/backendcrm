@@ -7,18 +7,40 @@ use Illuminate\Validation\ValidationException;
 
 class UpdateOpportunityDTO
 {
-    public string|null $description;
+    public int|null $reasonBuyId;
+    public int|null $reasonAnulationId;
+    public int|null $diagnosisId;
+    public int|null $doseId;
+    public int|null $treatmentTimeId;
+    public string|null $lastDateTaken;
+    public string|null $dateAbandonTreatment;
+    public string|null $observations;
+
     public function __construct(
         $request
     ) {
         $this->validate($request);
-        $this->description = $request['description'];
+        $this->reasonBuyId = $request['reasonBuyId'];
+        $this->reasonAnulationId = $request['reasonAnulationId'];
+        $this->diagnosisId = $request['diagnosisId'];
+        $this->doseId = $request['doseId'];
+        $this->treatmentTimeId = $request['treatmentTimeId'];
+        $this->lastDateTaken = $request['lastDateTaken'];
+        $this->dateAbandonTreatment = $request['dateAbandonTreatment'];
+        $this->observations = $request['observations'];
     }
 
     private function validate(array $request): void
     {
         $validator = Validator::make($request, [
-            'description' => 'string|nullable',
+            'reasonBuyId' => 'integer|nullable',
+            'reasonAnulationId' => 'integer|nullable',
+            'diagnosisId' => 'integer|nullable',
+            'doseId' => 'integer|nullable',
+            'treatmentTimeId' => 'integer|nullable',
+            'lastDateTaken' => 'string|nullable',
+            'dateAbandonTreatment' => 'string|nullable',
+            'observations' => 'string|nullable',
         ]);
 
         if ($validator->fails()) {

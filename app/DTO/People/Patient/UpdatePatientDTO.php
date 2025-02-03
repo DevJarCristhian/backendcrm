@@ -11,8 +11,8 @@ class UpdatePatientDTO
     public int|null $civilStatus;
     public int|null $patientStatus;
     public int|null $patientType;
-    public int|null $contactName;
-    public int|null $description;
+    public string|null $contactName;
+    public string|null $description;
 
     public function __construct(
         $request
@@ -33,8 +33,8 @@ class UpdatePatientDTO
             'civilStatus' => 'integer|nullable',
             'patientStatus' => 'integer|nullable',
             'patientType' => 'integer|nullable',
-            'contactName' => 'integer|nullable',
-            'description' => 'integer|nullable',
+            'contactName' => 'string|nullable',
+            'description' => 'string|nullable',
         ]);
 
         if ($validator->fails()) {
