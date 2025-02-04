@@ -31,8 +31,12 @@ class OpportunityServices
         if ($dto->search) {
             $query->where(function ($query) use ($dto) {
                 $query->where('o.serie_factura', 'like', '%' . $dto->search . '%')
+                    ->orWhere('o.no_factura', 'like', '%' . $dto->search . '%')
                     ->orWhere('o.fecha_facturacion', 'like', '%' . $dto->search . '%')
-                    ->orWhere('o.no_factura', 'like', '%' . $dto->search . '%');
+                    ->orWhere('pa.numero_documento', 'like', '%' . $dto->search . '%')
+                    ->orWhere('pa.nombre', 'like', '%' . $dto->search . '%')
+                    ->orWhere('pa.apellido', 'like', '%' . $dto->search . '%')
+                    ->orWhere('pro.descripcion', 'like', '%' . $dto->search . '%');
             });
         }
 

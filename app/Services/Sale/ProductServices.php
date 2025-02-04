@@ -33,7 +33,8 @@ class ProductServices
         if ($dto->search) {
             $query->where(function ($query) use ($dto) {
                 $query->where('nombre', 'like', '%' . $dto->search . '%')
-                    ->orWhere('descripcion', 'like', '%' . $dto->search . '%');
+                    ->orWhere('descripcion', 'like', '%' . $dto->search . '%')
+                    ->orWhere('descripcion_larga', 'like', '%' . $dto->search . '%');
             });
         }
 
